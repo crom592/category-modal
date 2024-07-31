@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
 
-function App() {
+import React, { useState } from 'react';
+import { Button } from 'antd';
+import CategoryModal from './CategoryModal';
+import categories from './categories.json'; // JSON 데이터를 임포트
+
+const App = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: '20px' }}>
+      <Button type="primary" onClick={showModal}>
+        카테고리 선택
+      </Button>
+      <CategoryModal visible={modalVisible} onClose={closeModal} categories={categories} />
     </div>
   );
-}
+};
 
 export default App;
